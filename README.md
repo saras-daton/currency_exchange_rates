@@ -34,6 +34,16 @@ vars:
     raw_dataset: "your_amazon_ads_dataset"
 ```
 
+## Schema Change
+
+We will create the models under the schema (<target_schema>_stg_amazon). In case, you would like the models to be written to the target schema or a different custom schema, please add the following in the dbt_project.yml file.
+
+```yml
+models:
+  currency_exchange_rates:
+    +schema: custom_schema_name # leave blank for just the target_schema
+```
+
 ## Optional Variables
 
 Package offers different configurations which must be set in your `dbt_project.yml` file under the above variables. These variables can be marked as True/False based on your requirements. Details about the variables are given below.
