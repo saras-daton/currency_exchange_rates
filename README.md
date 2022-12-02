@@ -18,7 +18,7 @@ If you haven't already, you will need to create a packages.yml file in your proj
 
 ```yaml
 packages:
-  - package: daton/currency_exchange_rates
+  - package: saras-daton/currency_exchange_rates
     version: 0.1.0
 ```
 
@@ -50,16 +50,16 @@ Package offers different configurations which must be set in your `dbt_project.y
 
 ```yaml
 vars:
-    currency_conversion_flag: False
+    currency_conversion_flag: True
 ```
 
 ### Currency Conversion 
 
-To enable currency conversion, which produces two columns - conversion_rate, conversion_currency based on the data from the Exchange Rates Connector from Daton.  please mark the currency conversion flag as True. By default, it is False.
+We would need to set the currency conversion flag to enable the model creation. By marking it as False, it generates an empty model.
 
 ## Scheduling the Package for refresh
 
-The ad tables that are being generated as part of this package are enabled for incremental refresh and can be scheduled by creating the job in Production Environment by giving the below command.
+The exchange rate tables that are being generated as part of this package are enabled for incremental refresh and can be scheduled by creating the job in Production Environment by giving the below command.
 
 ```
 dbt run --select currency_exchange_rates
@@ -67,7 +67,7 @@ dbt run --select currency_exchange_rates
 
 ## Models
 
-This package contains models from the Amazon API which includes Sponsored Brands, Products, Display. The primary outputs of this package are described below.
+This package contains the Exchange Rates model coming from the Exchange Rates Daton connector. Please follow this to get more details about [models](https://docs.google.com/spreadsheets/d/1OaJnVpBrPZaBusJXBHrT8dhnD2zctWMmSRN__WLQsl0/edit?usp=sharing). The primary outputs of this package are described below.
 
 | **Category**                 | **Model**  | **Description** |
 | ------------------------- | ---------------| ----------------------- |
