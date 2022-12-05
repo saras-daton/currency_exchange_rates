@@ -59,11 +59,7 @@ We would need to set the currency conversion flag to enable the model creation. 
 
 ## Scheduling the Package for refresh
 
-The exchange rate tables that are being generated as part of this package are enabled for incremental refresh and can be scheduled by creating the job in Production Environment by giving the below command.
-
-```
-dbt run --select currency_exchange_rates
-```
+The exchange rate tables that are being generated as part of this package are enabled for incremental refresh and can be scheduled by creating a job in Production Environment. During 'DBT Build', the models get refreshed.
 
 ## Models
 
