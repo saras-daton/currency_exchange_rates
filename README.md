@@ -1,5 +1,5 @@
 # Currency Exchange Rates Modelling
-This DBT package models the Exchange Rates data coming from [Daton](https://sarasanalytics.com/daton/). [Daton](https://sarasanalytics.com/daton/) is the Unified Data Platform for Global Commerce with 100+ pre-built connectors and data sets designed for accelerating the eCommerce data and analytics journey by [Saras Analytics](https://sarasanalytics.com).
+This dbt package models the Exchange Rates data coming from [Daton](https://sarasanalytics.com/daton/). [Daton](https://sarasanalytics.com/daton/) is the Unified Data Platform for Global Commerce with 100+ pre-built connectors and data sets designed for accelerating the eCommerce data and analytics journey by [Saras Analytics](https://sarasanalytics.com).
 
 This package would be performing the following funtions:
 
@@ -26,7 +26,7 @@ packages:
 
 ## Required Variables
 
-This package assumes that you have an existing DBT project with a BigQuery profile connected & tested. Source data is located using the following variables which must be set in your `dbt_project.yml` file.
+This package assumes that you have an existing dbt project with a BigQuery profile connected & tested. Source data is located using the following variables which must be set in your `dbt_project.yml` file.
 
 ```yaml
 vars:
@@ -59,7 +59,7 @@ We would need to set the currency conversion flag to enable the model creation. 
 
 ## Scheduling the Package for refresh
 
-The exchange rate tables that are being generated as part of this package are enabled for incremental refresh and can be scheduled by creating a job in Production Environment. During 'DBT Build', the models get refreshed.
+The exchange rate tables that are being generated as part of this package are enabled for incremental refresh and can be scheduled by creating a job in Production Environment. During 'dbt Build', the models get refreshed.
 
 ## Models
 
@@ -73,4 +73,4 @@ This package contains the Exchange Rates model coming from the Exchange Rates Da
 ## Resources:
 - Have questions, feedback, or need [help](https://calendly.com/priyanka-vankadaru/30min)? Schedule a call with our data experts or email us at info@sarasanalytics.com.
 - Learn more about Daton [here](https://sarasanalytics.com/daton/).
-- Refer [this](https://youtu.be/6zDTbM6OUcs) to know more about how to create a DBT account & connect to Bigquery
+- Refer [this](https://youtu.be/6zDTbM6OUcs) to know more about how to create a dbt account & connect to Bigquery
