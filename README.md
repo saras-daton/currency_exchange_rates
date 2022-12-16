@@ -19,7 +19,7 @@ If you haven't already, you will need to create a packages.yml file in your proj
 ```yaml
 packages:
   - package: saras-daton/currency_exchange_rates
-    version: 0.1.0
+    version: 1.0.0
 ```
 
 # Configuration 
