@@ -1,10 +1,4 @@
 {% if var('currency_conversion_flag') %}
-{{config( 
-    materialized='incremental', 
-    incremental_strategy='merge', 
-    partition_by = { 'field': 'date', 'data_type': 'date' },
-    cluster_by = ['from_currency_code','to_currency_code'], 
-    unique_key = ['date','from_currency_code','to_currency_code'])}}
 
 {% if is_incremental() %}
 {%- set max_loaded_query -%}
@@ -21,10 +15,8 @@ SELECT coalesce(MAX(_daton_batch_runtime) - 2592000000,0) FROM {{ this }}
 {% endif %}
 
 {% set table_name_query %}
-select concat('`', table_catalog,'.',table_schema, '.',table_name,'`') as tables 
-from {{ var('raw_projectid') }}.{{ var('raw_dataset') }}.INFORMATION_SCHEMA.TABLES 
-where lower(table_name) like '%exchangerates' 
-{% endset %}  
+    {{set_table_name('%exchangerates')}}    
+{% endset %} 
 
 {% set results = run_query(table_name_query) %}
 
@@ -37,16 +29,18 @@ where lower(table_name) like '%exchangerates'
 
 {% for i in results_list %}
     {% set id =i.split('.')[2].split('_')[1] %}
-    SELECT * except(row_num)
+    SELECT * {{exclude()}} (row_num)
     From (
         select 
         date, 
         from_currency_code, 
         to_currency_code, 
         value,
-        _daton_user_id,
-        _daton_batch_runtime,
-        _daton_batch_id,
+        {{daton_user_id()}} as _daton_user_id,
+        {{daton_batch_runtime()}} as _daton_batch_runtime,
+        {{daton_batch_id()}} as _daton_batch_id,
+        current_timestamp() as _last_updated,
+        '{{env_var("DBT_CLOUD_RUN_ID", "manual")}}' as _run_id,
         DENSE_RANK() OVER (PARTITION BY date, from_currency_code, to_currency_code order by _daton_batch_runtime desc) row_num
         from {{i}}    
             {% if is_incremental() %}
@@ -67,6 +61,8 @@ select
         null value,
         null _daton_user_id,
         null _daton_batch_runtime,
-        null _daton_batch_id
+        null _daton_batch_id,
+        current_timestamp() as _last_updated,
+        '{{env_var("DBT_CLOUD_RUN_ID", "manual")}}' as _run_id
 
 {% endif %}
