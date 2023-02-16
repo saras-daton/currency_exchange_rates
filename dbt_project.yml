@@ -10,9 +10,6 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 # This setting configures which "profile" dbt uses for this project.
 profile: 'currency_exchange_rates'
 
-vars:
-  currency_conversion_flag: True
-
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
