@@ -56,6 +56,7 @@ SELECT coalesce(MAX(_daton_batch_runtime) - 2592000000,0) FROM {{ this }}
 {{config( 
     materialized='table')}}
 select 
+        cast(null as date) as date,
         null from_currency_code, 
         null to_currency_code, 
         null value,
