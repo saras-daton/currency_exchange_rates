@@ -1,4 +1,9 @@
 {% if var('currency_conversion_flag') %}
+{{ config(
+    materialized = "table",
+    cluster_by: ['date','from_currency_code','to_currency_code'],
+    unique_key: ['date','from_currency_code','to_currency_code']) }}
+
 
 {% if is_incremental() %}
 {%- set max_loaded_query -%}
@@ -20,7 +25,9 @@ SELECT coalesce(MAX(_daton_batch_runtime) - 2592000000,0) FROM {{ this }}
 
 {% set results = run_query(table_name_query) %}
 
-{% if execute %}
+{% if var('currency_conversion_flag') %}
+{% set results_list = [] %}
+{% elif execute %}
 {# Return the first column #}
 {% set results_list = results.columns[0].values() %}
 {% else %}
