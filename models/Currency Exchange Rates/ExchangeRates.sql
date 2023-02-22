@@ -1,9 +1,8 @@
 {% if var('currency_conversion_flag') %}
-{{ config(
-    materialized = "table",
-    cluster_by = ['date','from_currency_code','to_currency_code'],
-    unique_key = ['date','from_currency_code','to_currency_code']
-    ) }}
+{{ config( enabled = True ) }}
+{% else %}
+{{ config( enabled = False ) }}
+{% endif %}
 
 
 {% if is_incremental() %}
@@ -59,5 +58,3 @@ SELECT coalesce(MAX(_daton_batch_runtime) - 2592000000,0) FROM {{ this }}
     where row_num =1 
     {% if not loop.last %} union all {% endif %}
 {% endfor %}
-
-{% endif %}
