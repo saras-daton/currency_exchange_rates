@@ -10,7 +10,7 @@ require-dbt-version: [">=1.0.0", "<2.0.0"]
 # This setting configures which "profile" dbt uses for this project.
 profile: 'currency_exchange_rates'
 
-var:
+vars:
   currency_conversion_flag: True
 
 # These configurations specify where dbt should look for different types of files.
