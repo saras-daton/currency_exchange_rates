@@ -25,9 +25,7 @@ SELECT coalesce(MAX(_daton_batch_runtime) - 2592000000,0) FROM {{ this }}
 
 {% set results = run_query(table_name_query) %}
 
-{% if var('currency_conversion_flag') %}
-{% set results_list = [] %}
-{% elif execute %}
+{% if execute %}
 {# Return the first column #}
 {% set results_list = results.columns[0].values() %}
 {% else %}
