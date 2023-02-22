@@ -52,18 +52,4 @@ SELECT coalesce(MAX(_daton_batch_runtime) - 2592000000,0) FROM {{ this }}
     {% if not loop.last %} union all {% endif %}
 {% endfor %}
 
-{% else %}
-{{config( 
-    materialized='table')}}
-select 
-        cast(null as date) as date,
-        null from_currency_code, 
-        null to_currency_code, 
-        null value,
-        null _daton_user_id,
-        null _daton_batch_runtime,
-        null _daton_batch_id,
-        current_timestamp() as _last_updated,
-        '{{env_var("DBT_CLOUD_RUN_ID", "manual")}}' as _run_id
-
 {% endif %}
