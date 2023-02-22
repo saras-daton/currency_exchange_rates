@@ -1,8 +1,9 @@
 {% if var('currency_conversion_flag') %}
 {{ config(
     materialized = "table",
-    cluster_by: ['date','from_currency_code','to_currency_code'],
-    unique_key: ['date','from_currency_code','to_currency_code']) }}
+    cluster_by = ['date','from_currency_code','to_currency_code'],
+    unique_key = ['date','from_currency_code','to_currency_code']
+    ) }}
 
 
 {% if is_incremental() %}
