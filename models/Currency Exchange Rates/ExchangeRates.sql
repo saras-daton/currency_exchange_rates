@@ -1,4 +1,4 @@
-{% if var('currency_conversion_flag') %}
+{% if var('currency_conversion_flag') and var('ExchangeRates') %}
 {{ config( enabled = True ) }}
 {% else %}
 {{ config( enabled = False ) }}

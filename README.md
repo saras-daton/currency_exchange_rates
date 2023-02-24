@@ -44,6 +44,15 @@ models:
     +schema: custom_schema_name # leave blank for just the target_schema
 ```
 
+### Table Exclusions
+
+If you need to exclude any of the models, declare the model names as variables and mark them as False. Refer the table below for model details. By default, all tables are created.
+
+Example:
+```yaml
+vars:
+ExchangeRates: False
+```
 
 ## Models
 
