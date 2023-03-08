@@ -19,7 +19,7 @@ If you haven't already, you will need to create a packages.yml file in your proj
 ```yaml
 packages:
   - package: saras-daton/currency_exchange_rates
-    version: 1.0.0
+    version: v1.0.2
 ```
 
 # Configuration 
@@ -30,13 +30,13 @@ This package assumes that you have an existing dbt project with a BigQuery profi
 
 ```yaml
 vars:
-    raw_projectid: "your_gcp_project"
-    raw_dataset: "your_amazon_ads_dataset"
+    raw_database: "your_database"
+    raw_schema: "your_schema"
 ```
 
-## Schema Change
+## Setting Target Schema
 
-We will create the models under the schema (<target_schema>_stg_amazon). In case, you would like the models to be written to the target schema or a different custom schema, please add the following in the dbt_project.yml file.
+Models will be create unified tables under the schema (<target_schema>_stg_amazon). In case, you would like the models to be written to the target schema or a different custom schema, please add the following in the dbt_project.yml file.
 
 ```yml
 models:
@@ -44,22 +44,15 @@ models:
     +schema: custom_schema_name # leave blank for just the target_schema
 ```
 
-## Optional Variables
+### Table Exclusions
 
-Package offers different configurations which must be set in your `dbt_project.yml` file under the above variables. These variables can be marked as True/False based on your requirements. Details about the variables are given below.
+If you need to exclude any of the models, declare the model names as variables and mark them as False. Refer the table below for model details. By default, all tables are created.
 
+Example:
 ```yaml
 vars:
-    currency_conversion_flag: True
+ExchangeRates: False
 ```
-
-### Currency Conversion 
-
-We would need to set the currency conversion flag to enable the model creation. By marking it as False, it generates an empty model.
-
-## Scheduling the Package for refresh
-
-The exchange rate tables that are being generated as part of this package are enabled for incremental refresh and can be scheduled by creating a job in Production Environment. During 'dbt Build', the models get refreshed.
 
 ## Models
 
@@ -67,10 +60,10 @@ This package contains the Exchange Rates model coming from the Exchange Rates Da
 
 | **Category**                 | **Model**  | **Description** |
 | ------------------------- | ---------------| ----------------------- |
-|Currency Exchange | [ExchangeRates](models/Currency%20Exchange%20Rates/ExchangeRates.sql)  | A list of portfolios associated with the account |
+|Currency Exchange | [ExchangeRates](models/Currency%20Exchange%20Rates/ExchangeRates.sql)  | Date level Currency ExchangeRates |
 
 
 ## Resources:
-- Have questions, feedback, or need [help](https://calendly.com/priyanka-vankadaru/30min)? Schedule a call with our data experts or email us at info@sarasanalytics.com.
+- Have questions, feedback, or need [help](https://calendly.com/srinivas-janipalli/30min)? Schedule a call with our data experts or email us at info@sarasanalytics.com.
 - Learn more about Daton [here](https://sarasanalytics.com/daton/).
 - Refer [this](https://youtu.be/6zDTbM6OUcs) to know more about how to create a dbt account & connect to Bigquery
