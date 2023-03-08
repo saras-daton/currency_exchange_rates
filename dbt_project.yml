@@ -12,7 +12,6 @@ profile: 'currency_exchange_rates'
 
 vars:
   currency_conversion_flag: True
-
   ExchangeRates: True
 
 # These configurations specify where dbt should look for different types of files.

@@ -60,7 +60,7 @@ This package contains the Exchange Rates model coming from the Exchange Rates Da
 
 | **Category**                 | **Model**  | **Description** |
 | ------------------------- | ---------------| ----------------------- |
-|Currency Exchange | [ExchangeRates](models/Currency%20Exchange%20Rates/ExchangeRates.sql)  | A list of portfolios associated with the account |
+|Currency Exchange | [ExchangeRates](models/Currency%20Exchange%20Rates/ExchangeRates.sql)  | Date level Currency ExchangeRates |
 
 
 ## Resources:
